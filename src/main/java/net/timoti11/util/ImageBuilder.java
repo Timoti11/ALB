@@ -56,7 +56,7 @@ public class ImageBuilder {
 
         try {
             //Take template image for width/height
-            BufferedImage template = ImageIO.read(new File("template.png"));
+            BufferedImage template = ImageIO.read(new File("assets/baseAssets/template.png"));
 
             BufferedImage resultImage = new BufferedImage(
                     template.getWidth(),
@@ -72,27 +72,27 @@ public class ImageBuilder {
                 String banner = imgAssets.getBanner();
                 bannerRender = ImageIO.read(new URL(banner));
             } catch (IOException e) {
-                File banner = new File("template.png");
+                File banner = new File("assets/baseAssets/template.png");
                 bannerRender = ImageIO.read(banner);
             }
             g.drawImage(bannerRender, 0, 0, null);
 
 
             //Dark background
-            renderImageElement(g, "black", 0, 0, 0, 0);
+            renderImageElement(g, "assets/baseAssets/black", 0, 0, 0, 0);
 
 
             //Platform Image
             if (platform.equals("PC")) {
-                renderImageElement(g, "PC", 228, 150, 50, 50);
+                renderImageElement(g, "assets/platform/PC", 228, 150, 50, 50);
             } else if (platform.equals("X1")) {
-                renderImageElement(g, "X1", 228, 150, 50, 50);
+                renderImageElement(g, "assets/platform/X1", 228, 150, 50, 50);
             }
 
 
             //Blur background for nameBackgroundRender
             bannerRender = BlurImage.getBlur(bannerRender);
-            BufferedImage nameFieldMask = ImageIO.read(new File("nameFieldMask.png"));
+            BufferedImage nameFieldMask = ImageIO.read(new File("assets/nameField/nameFieldMask.png"));
 
             BufferedImage nameFieldResult = new BufferedImage(nameFieldMask.getWidth(), nameFieldMask.getHeight(), BufferedImage.TYPE_INT_ARGB);
             Graphics2D gMask = nameFieldResult.createGraphics();
@@ -106,14 +106,14 @@ public class ImageBuilder {
 
 
             //NameBackground Image
-            renderImageElement(g, "toNextLevelPercent", 123, 44, 0, 0);
+            renderImageElement(g, "assets/nameField/toNextLevelPercent", 123, 44, 0, 0);
 
 
             //toNextLevelPercent Image
             int percent = apiResponse.getGlobal().getToNextLevelPercent();
 
-            renderImageElement(g, "toNextLevelPercentChunk", 215, 123, percent * 5, 0);
-            renderImageElement(g, "toNextLevelPercentEnd", 215 + percent * 5, 123, 0, 0);
+            renderImageElement(g, "assets/nameField/toNextLevelPercentChunk", 215, 123, percent * 5, 0);
+            renderImageElement(g, "assets/nameField/toNextLevelPercentEnd", 215 + percent * 5, 123, 0, 0);
 
 
             //Rank Image
@@ -179,9 +179,8 @@ public class ImageBuilder {
         List<Data> data = apiResponse.getLegends().getSelected().getData();
         if (!data.isEmpty()) {
             for (int i = 0; i < data.size(); i++) {
-                if (data.get(i) == null) {
+                if (data.get(i) != null) {
                     g.drawImage(renderImageBarTemplate(i, data), 1006, 38+i*150, 445, 140, null);
-                } else {
                 }
             }
         }
@@ -189,7 +188,7 @@ public class ImageBuilder {
 
     public static BufferedImage renderImageBarTemplate(int i, List<Data> data) throws IOException {
         try {
-            BufferedImage imageBarTemplate = ImageIO.read(new File("currentStatsField.png"));
+            BufferedImage imageBarTemplate = ImageIO.read(new File("assets/statsField/currentStatsField.png"));
             BufferedImage imageBarResult = new BufferedImage(
                     imageBarTemplate.getWidth(),
                     imageBarTemplate.getHeight(),

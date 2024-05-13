@@ -18,8 +18,8 @@ import static net.timoti11.util.StatsEmbedBuilder.sendEmbedImage;
 import static net.timoti11.util.StatsEmbedBuilder.sendEmbedPre;
 
 public class SlashCommandInteraction extends ListenerAdapter {
-    private static final File waitingImage = new File("waiting-min.png");
-    private static final File loadingImage = new File("loading-min.png");
+    private static final File waitingImage = new File("assets/statusImage/waiting-min.png");
+    private static final File loadingImage = new File("assets/statusImage/loading-min.png");
     private static final Map<String, String> PLATFORM_MAP = new HashMap<>();
 
     static {
